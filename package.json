@@ -2,9 +2,11 @@
   "name": "back",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/mhbuiles/Agroapp_back/issues"
   },
-  "homepage": "https://github.com/mhbuiles/Agroapp_back#readme"
+  "homepage": "https://github.com/mhbuiles/Agroapp_back#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
