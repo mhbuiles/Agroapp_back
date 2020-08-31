@@ -55,7 +55,7 @@ module.exports = {
   async signin( req , res ) {
     try {
       const { email , password } = req.body;
-      const user = await User.findOne( { email} );
+      const user = await User.findOne( { email } );
 
       if (!user) {
         throw Error('El usuario no existe')
@@ -73,7 +73,7 @@ module.exports = {
         { expiresIn: 60 }
       );
 
-      res.status(200).json( { token } );
+      res.status(200).json( { token , user } );
     }
       catch (err) {
         res.status(401).json({ message : err.message })
