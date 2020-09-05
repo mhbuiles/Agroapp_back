@@ -1,18 +1,28 @@
 const Product = require('../models/product.model');
+const User = require('../models/user.model');
 
 module.exports = {
-  list(req, res) {
-    Product
-      .find()
-      .then((products) => res.status(200).json(products))
+   async list( req , res ) {
+    console.log('here');
+    const products = await Product.find(  ).populate( 'user' , 'name' )
+    res.status(200).json(products)
   },
-  create(req, res) {
-    const data = req.body;
-
-    Product
-      .create(data)
-      .then((product) => res.status(200).json(product))
-      .catch((err) => res.status(400).json(err));
+  async list2( req , res ) {
+   console.log('here');
+   const products = await Product.find(  ).populate( 'user' , 'name' )
+   res.status(200).json(products)
+ },
+  async create( req , res ) {
+    try {
+      const data = req.body;
+      const user = await User.findById( req.user );
+      const product = await Product.create( { ...data , user } );
+      user.products.push(product);
+      await user.save();
+      res.status(200).json(product)
+    } catch(err) {
+      res.status(400).json(err)
+    }
   },
   show(req, res) {
     const { id } = req.params;

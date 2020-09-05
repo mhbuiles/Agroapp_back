@@ -9,6 +9,7 @@ const userSchema = new Schema({
   id_type : String,
   id_number : String,
   password : String,
+  products : [ { type : Schema.Types.ObjectId , ref : 'Product' } ],
 }, {
   timestamps : true,
 });

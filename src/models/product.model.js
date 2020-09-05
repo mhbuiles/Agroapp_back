@@ -5,7 +5,12 @@ const productSchema = new Schema({
   price : Number,
   location : String,
   image : String,
-  description: String,
+  user : {
+    type : Schema.Types.ObjectId,
+    ref : 'User',
+    required : true,
+    description: String,
+  },
 }, {
   timestamps : true,
 });

@@ -4,7 +4,7 @@ module.exports = {
   auth( req , res , next ) {
     try {
       const { authorization } = req.headers;
-
+      
       if( !authorization ) {
         throw Error('Your session has expired!')
       }

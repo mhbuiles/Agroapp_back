@@ -6,6 +6,7 @@ module.exports = {
   list( req , res ) {
     User
       .find()
+      .populate('products')
       .then((users) => res.status(200).json(users))
   },
   async signup( req , res ) {
@@ -70,7 +71,7 @@ module.exports = {
       const token = jwt.sign(
         { id: user._id },
         process.env.SECRET,
-        { expiresIn: 60 }
+        { expiresIn: 60 * 60 * 24 * 365 }
       );
 
       res.status(200).json( { token , user } );
