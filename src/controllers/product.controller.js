@@ -3,22 +3,21 @@ const User = require('../models/user.model');
 
 module.exports = {
    async list( req , res ) {
-    console.log('here');
     const products = await Product.find(  ).populate( 'user' , 'name' )
     res.status(200).json(products)
   },
   async list2( req , res ) {
-   console.log('here');
-   const products = await Product.find(  ).populate( 'user' , 'name' )
+   const userId = await User.findById( req.user );
+   const products = await Product.find( { user : userId } ).populate( 'user' , 'name' )
    res.status(200).json(products)
  },
   async create( req , res ) {
     try {
-      const data = req.body;
+      const { file , ...data } = req.body;
       const user = await User.findById( req.user );
-      const product = await Product.create( { ...data , user } );
+      const product = await Product.create( { ...data , image : file.secure_url , user } );
       user.products.push(product);
-      await user.save();
+      await user.save( { validateBeforeSave : false } );
       res.status(200).json(product)
     } catch(err) {
       res.status(400).json(err)

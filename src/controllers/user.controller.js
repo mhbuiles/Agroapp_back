@@ -40,8 +40,14 @@ module.exports = {
     const { id } = req.params;
     const data = req.body;
 
+    const opt = {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    };
+
     User
-      .findByIdAndUpdate(id, data, { new: true })
+      .findByIdAndUpdate( id , data , opt )
       .then( user => res.status(200).json(user))
       .catch(err => res.status(400).json(err));
   },

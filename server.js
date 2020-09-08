@@ -6,6 +6,7 @@ const productRouter = require('./src/routes/product');
 const userRouter = require('./src/routes/user');
 const app = express();
 const { auth } = require('./src/utils/middlewares');
+const port = process.env.PORT || 8000;
 
 db();
 app.use(cors());
@@ -14,4 +15,4 @@ app.use('/products' , productRouter);
 app.use('/users' , userRouter);
 
 
-app.listen( 8000 , () => console.log('App running on http://localhost:8000'));
+app.listen( port , () => console.log('App running on http://localhost:8000'));
