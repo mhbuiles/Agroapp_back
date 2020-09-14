@@ -52,12 +52,10 @@ module.exports = {
       .catch(err => res.status(400).json(err));
   },
   destroy( req , res ) {
-    const { id } = req.params;
-
     User
-      .findByIdAndDelete(id)
-      .then( user => res.status(200).json(user))
-      .catch(() => res.status(400).json({ message: `Could not find user with id ${id}` }));
+      .findByIdAndDelete( req.user )
+      .then( user => res.status(200))
+      .catch(() => res.status(400).json({ message: `Could not find user with id ${req.user}` }));
   },
   async signin( req , res ) {
     try {

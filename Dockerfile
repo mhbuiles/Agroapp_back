@@ -7,6 +7,6 @@ COPY . .
 RUN npm install
 
 EXPOSE 8000
-VOLUME /usr/src/
+VOLUME /usr/src/src/
 
 CMD [ "npm" , "run" , "dev" ]
