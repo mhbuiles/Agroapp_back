@@ -5,7 +5,7 @@ const { formData } = require('../utils/middlewares');
 
 router.route('/').get( auth , productController.list);
 router.route('/myproducts').get( auth , productController.list2);
-router.route('/').post( formData , auth , productController.create);
+router.route('/').post( auth, formData , productController.create);
 router.route('/:id').get(productController.show);
 router.route('/:id').put(productController.update);
 router.route('/:id').delete(productController.destroy);

@@ -13,13 +13,18 @@ module.exports = {
  },
   async create( req , res ) {
     try {
-      const { file , ...data } = req.body;
+      const { file = {} , ...data } = req.body;
+      
       const user = await User.findById( req.user );
+      
       const product = await Product.create( { ...data , image : file.secure_url , user } );
+      
       user.products.push(product);
       await user.save( { validateBeforeSave : false } );
+      
       res.status(200).json(product)
     } catch(err) {
+      
       res.status(400).json(err)
     }
   },

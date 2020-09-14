@@ -25,8 +25,7 @@ module.exports = {
 
       const { id } = jwt.verify( token , process.env.SECRET );
 
-      req.user = id
-
+      req.user = id      
       next();
     }
       catch (err) {
@@ -40,8 +39,7 @@ module.exports = {
 
     function done() {
       if( uploadingFile ) return;
-      if( uploadingCount > 0 ) return;
-
+      if( uploadingCount > 0 ) return;      
       next();
     }
 

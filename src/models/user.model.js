@@ -9,7 +9,7 @@ const userSchema = new Schema({
   },
   lname : {
     type : String,
-    required : [ true , 'El apellidos nombre es obligatorio' ],
+    required : [ true , 'El campo apellidos es obligatorio' ],
   },
   email :{
     type : String,
