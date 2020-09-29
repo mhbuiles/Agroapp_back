@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { transporter , verify , welcome } = require('../utils/mailer');
 
 module.exports = {
   list( req , res ) {
@@ -12,9 +13,18 @@ module.exports = {
   async signup( req , res ) {
     try{
       const data = req.body;
-      const { password } = req.body;
+      const { name , email , password } = req.body;
       const encryptedPassword = await bcrypt.hash( password , 8 );
       const user = await User.create( { ...data , password : encryptedPassword } )
+
+      const mail = {
+        from : `"${process.env.MAIL_USERNAME}" <${process.env.MAIL_USER}>`,
+        to : email,
+        subject : 'Bienvenido a Agroapp',
+        ...welcome(name)
+      }
+
+      await transporter.sendMail(mail)
 
       const token = jwt.sign(
               { id: user._id },
@@ -23,6 +33,7 @@ module.exports = {
             );
 
       res.status(200).json( { token } );
+
     }
       catch (err) {
         res.status(400).json(err);
