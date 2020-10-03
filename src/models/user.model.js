@@ -36,6 +36,10 @@ const userSchema = new Schema({
     type : String,
     required : [ true , 'El campo dirección es obligatorio' ],
   },
+  city : {
+    type : String,
+    required : [ true , 'El campo ciudad es obligatorio'],
+  },
   id_type : {
     type : String,
     required : [ true , 'El campo tipo de identificación es obligatorio' ],
@@ -48,11 +52,32 @@ const userSchema = new Schema({
     type : String,
     required : [ true , 'El campo número de identificación es obligatorio' ],
   },
+  baccount : {
+    type : String,
+    required : false,
+  },
+  bacctype : {
+    type : String,
+    required : false,
+    enum : {
+      values : [ 'Ahorros' , 'Corriente' , '' ],
+      message : 'No es una opción válida'
+    },
+  },
+  bank : {
+    type : String,
+    required : false,
+    enum : {
+      values : [ 'Bancolombia' , 'Banco de Bogotá' , 'Davivienda' , 'Nequi' , 'Daviplata' , 'Banco de Occidente' , 'Banco AVVillas' , 'Banco Popular' , 'Itaú' , 'Colpatria' , 'BBVA' , 'Banco Agrario' , 'Citibank' , 'Banco Caja Social' , 'Banco Falabella' , 'Banco Pichincha' , 'Bancoomeva' , '' ],
+      message : 'No es una opción válida'
+    },
+  },
   password : {
     type : String,
     required : [ true , 'El campo contraseña es obligatorio' ],
   },
   products : [ { type : Schema.Types.ObjectId , ref : 'Product' } ],
+  transactions : [ { type : Schema.Types.ObjectId , ref : 'Transaction' } ],
 }, {
   timestamps : true,
 });

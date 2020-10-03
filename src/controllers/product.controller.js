@@ -14,17 +14,17 @@ module.exports = {
   async create( req , res ) {
     try {
       const { file = {} , ...data } = req.body;
-      
+
       const user = await User.findById( req.user );
-      
+
       const product = await Product.create( { ...data , image : file.secure_url , user } );
-      
+
       user.products.push(product);
       await user.save( { validateBeforeSave : false } );
-      
+
       res.status(200).json(product)
     } catch(err) {
-      
+
       res.status(400).json(err)
     }
   },
@@ -35,6 +35,17 @@ module.exports = {
       .findById(id)
       .then(product => res.status(200).json(product))
       .catch(() => res.status(400).json({ message: `Could not find product with id ${id}` }));
+  },
+  async show2(req, res) {
+    try{
+      const { id } = req.params;
+
+      const idsAB = await Product.find().where('_id').in(id.split(',')).exec();
+
+      res.status(200).json(idsAB)
+    } catch(err) {
+      res.status(400).json(err)
+    }
   },
   update(req, res) {
     const { id } = req.params;

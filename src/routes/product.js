@@ -7,6 +7,7 @@ router.route('/').get( auth , productController.list);
 router.route('/myproducts').get( auth , productController.list2);
 router.route('/').post( auth, formData , productController.create);
 router.route('/:id').get(productController.show);
+router.route('/transactprods/:id').get(productController.show2);
 router.route('/:id').put(productController.update);
 router.route('/:id').delete(productController.destroy);
 

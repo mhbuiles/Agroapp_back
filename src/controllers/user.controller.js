@@ -1,7 +1,7 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { transporter , verify , welcome } = require('../utils/mailer');
+const { transporter , welcome } = require('../utils/mailer');
 
 module.exports = {
   list( req , res ) {
