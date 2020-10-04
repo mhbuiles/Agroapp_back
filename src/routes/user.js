@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const userController = require('../controllers/user.controller');
 const { auth } = require('../utils/middlewares');
+const { formData } = require('../utils/middlewares');
 
 router.route('/').get(userController.list);
-router.route('/').post(userController.signup);
+router.route('/').post( formData , userController.signup);
 router.route('/:id').get(userController.show);
 router.route('/:id').put(userController.update);
 router.route('/').delete( auth , userController.destroy);

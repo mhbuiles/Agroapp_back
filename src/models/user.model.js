@@ -78,6 +78,7 @@ const userSchema = new Schema({
   },
   products : [ { type : Schema.Types.ObjectId , ref : 'Product' } ],
   transactions : [ { type : Schema.Types.ObjectId , ref : 'Transaction' } ],
+  image : String,
 }, {
   timestamps : true,
 });

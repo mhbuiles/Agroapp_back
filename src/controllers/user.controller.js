@@ -12,10 +12,13 @@ module.exports = {
   },
   async signup( req , res ) {
     try{
-      const data = req.body;
+
+      const { file = {} , ...data } = req.body;
+
+      // const data = req.body
       const { name , email , password } = req.body;
       const encryptedPassword = await bcrypt.hash( password , 8 );
-      const user = await User.create( { ...data , password : encryptedPassword } )
+      const user = await User.create( { ...data , image : file.secure_url , password : encryptedPassword } )
 
       const mail = {
         from : `"${process.env.MAIL_USERNAME}" <${process.env.MAIL_USER}>`,
