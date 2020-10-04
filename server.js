@@ -7,7 +7,7 @@ const userRouter = require('./src/routes/user');
 const transactionRouter = require('./src/routes/transaction');
 const app = express();
 const { auth } = require('./src/utils/middlewares');
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 
 db();
 app.use(cors());
